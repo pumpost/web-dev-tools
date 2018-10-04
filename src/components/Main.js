@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
-import Test from "./Test";
+import ObjectPage from "./ObjectPage";
 
-const Main = () => (
+export default () => (
   <main>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/test" component={Test} />
+      <Route path="/object" component={ObjectPage} />
     </Switch>
   </main>
 );
-
-export default Main;

@@ -7,6 +7,7 @@ import App from "./App";
 import reducers from "./reducers";
 import registerServiceWorker from "./registerServiceWorker";
 import { BrowserRouter } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
