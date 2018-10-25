@@ -1,28 +1,30 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
+import InputObj from "./InputObj";
 
 class RandomObject extends Component {
-  state = {
-    objectVal: ""
-  };
+  // state = {
+  //   objectVal: ""
+  // };
 
-  updateInputValue = (input, evt) => {
-    this.setState({ [input]: evt.target.value });
+  // updateInputValue = (input, evt) => {
+  //   this.setState({ [input]: evt.target.value });
+  // };
+
+  addButton = () => {
+    console.log(111);
   };
 
   render() {
-    console.log(this.state.objectVal);
+    // console.log(this.state.objectVal);
     return (
       <div className="text-left container">
         <h2> Random Object Generator</h2>
         <FormGroup>
           <Label for="exampleEmail">Random Object</Label>
           Generate
-          <Input
-            value={this.state.objectVal}
-            onChange={this.updateInputValue.bind(this, "objectVal")}
-          />
-          random array
+          <InputObj />
+          <Button onClick={this.addButton}>+</Button>
         </FormGroup>
       </div>
     );
