@@ -3,13 +3,13 @@ import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
 
 class InputObj extends Component {
   render() {
-    const { result } = this.props;
+    const { result, index } = this.props;
 
     return (
       <Fragment>
         <Input
           value={this.props.value}
-          onChange={e => this.props.handleUpdateVal(e, "objectVal")}
+          onChange={e => this.props.handleUpdateVal(index, e.target.value)}
         />
         <FormGroup check>
           <Label check>
@@ -22,6 +22,7 @@ class InputObj extends Component {
             Numeric digits (0-9)
           </Label>
         </FormGroup>
+        {this.props.val}
       </Fragment>
     );
   }

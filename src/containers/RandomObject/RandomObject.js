@@ -6,16 +6,29 @@ class RandomObject extends Component {
   state = {
     objectVal: "",
     numeric: true,
-    result: [{ text: "111" }, { text: "2222" }]
+    text: "",
+    val: "",
+    name: "",
+    inputs: [{ name: "" }]
   };
 
-  updateInputValue = (evt, input) => {
-    this.setState({ [input]: evt.target.value });
+  updateInputValue = (index, newValue) => {
+    const value = this.state.inputs.map((val, valindex) => {
+      if (index !== valindex) return val;
+      return { ...val, name: newValue };
+    });
+
+    this.setState({ inputs: value });
   };
+
+  // handleNameChange = (i, value) => {
+  //   this.setState({ name: value });
+  // };
 
   handleCheckbox = evt => {
     const target = evt.target;
-    this.setState({ [target.name]: target.checked });
+    this.randomResult = this.randomAll();
+    this.setState({ [target.name]: target.checked, val: this.randomResult });
   };
 
   randomAll() {
@@ -26,11 +39,9 @@ class RandomObject extends Component {
   }
 
   addButton = () => {
-    const randomResult = this.randomAll();
-    const objName = this.state.objectVal;
-    let result = [];
-    result.push({ [objName]: randomResult });
-    this.setState({ result });
+    this.setState({
+      inputs: this.state.inputs.concat([{ name: "" }])
+    });
   };
 
   generateResult = () => {
@@ -38,24 +49,10 @@ class RandomObject extends Component {
     // console.log(result);
   };
 
-  renderInput() {
-    return this.state.result.map((data, i) => {
-      return (
-        <InputObj
-          key={i}
-          handleUpdateVal={this.updateInputValue}
-          value={data.text}
-          numeric={this.state.numeric}
-          handleCheckbox={this.handleCheckbox}
-        />
-      );
-    });
-  }
-
   render() {
-    const { result } = this.state;
+    const { result, inputs } = this.state;
 
-    console.log(result);
+    console.log(inputs);
     return (
       <div className="text-left container">
         <h2> Random Object Generator</h2>
@@ -63,32 +60,24 @@ class RandomObject extends Component {
           <Label for="exampleEmail">Random Object</Label>
           Generate
           {/* <InputObj
-            handleUpdateVal={this.updateInputValue}
-            value={this.state.objectVal}
+            handleUpdateVal={this.handleNameChange}
+            value={this.state.name}
             numeric={this.state.numeric}
             handleCheckbox={this.handleCheckbox}
           /> */}
-          {/* {result.length > 0 ? (
-            this.renderInput()
-          ) : (
-            <InputObj
-              handleUpdateVal={this.updateInputValue}
-              value={this.state.objectVal}
-              numeric={this.state.numeric}
-              handleCheckbox={this.handleCheckbox}
-            />
-          )} */}
-          {result.map((data, i) => {
+          {inputs.map((data, i) => {
             return (
               <InputObj
                 key={i}
                 handleUpdateVal={this.updateInputValue}
-                value={data.text}
+                value={data.name}
                 numeric={this.state.numeric}
                 handleCheckbox={this.handleCheckbox}
+                index={i}
               />
             );
           })}
+          {/* {this.renderInput()} */}
           <Button onClick={this.addButton} color="success">
             +
           </Button>
